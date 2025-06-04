@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Inventory.Mobile.Models
+namespace HerreraSierraVargasProyecto2P.Models
 {
     public class PedidoDto
     {

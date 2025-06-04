@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Inventory.Mobile.Models;
+using HerreraSierraVargasProyecto2P.Models;
 
-namespace Inventory.Mobile.Services
+namespace HerreraSierraVargasProyecto2P.Services
 {
     public interface IDetallePedidoService
     {

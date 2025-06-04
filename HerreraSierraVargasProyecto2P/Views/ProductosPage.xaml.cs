@@ -1,10 +1,10 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
-using Inventory.Mobile.Models;
-using Inventory.Mobile.Services;
+using HerreraSierraVargasProyecto2P.Models;    
+using HerreraSierraVargasProyecto2P.Services;
 using Microsoft.Maui.Controls;
 
-namespace Inventory.Mobile.Views
+namespace HerreraSierraVargasProyecto2P.Views
 {
     public partial class ProductosPage : ContentPage
     {
@@ -20,7 +20,7 @@ namespace Inventory.Mobile.Views
         {
             base.OnAppearing();
 
-            // Cada vez que aparece la página, recargamos la lista de productos
+            // Cada vez que aparece la pÃ¡gina, recargamos la lista de productos
             var productos = await _productoService.ObtenerTodosAsync();
             ProductosListView.ItemsSource = productos;
         }
@@ -34,7 +34,7 @@ namespace Inventory.Mobile.Views
             if (productoSeleccionado == null)
                 return;
 
-            // Navegar a página de detalle, enviando el id como parámetro
+            // Navegar a pÃ¡gina de detalle, enviando el id como parÃ¡metro
             await Shell.Current.GoToAsync($"productoDetalle?productoId={productoSeleccionado.Id}");
 
             // Deseleccionar item
@@ -43,7 +43,7 @@ namespace Inventory.Mobile.Views
 
         private async void OnAgregarProductoClicked(object sender, EventArgs e)
         {
-            // Navegar a la misma página de detalle, pero sin parámetro -> modo “crear nuevo”
+            // Navegar a la misma pÃ¡gina de detalle, pero sin parÃ¡metro â†’ modo â€œcrear nuevoâ€
             await Shell.Current.GoToAsync("productoDetalle");
         }
     }

@@ -1,5 +1,5 @@
 ﻿using Foundation;
-using Inventory.Mobile;
+using HerreraSierraVargasProyecto2P;
 
 namespace HerreraSierraVargasProyecto2P
 {

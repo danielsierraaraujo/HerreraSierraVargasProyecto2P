@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Inventory.Mobile.Models;
-using Inventory.Mobile.Services;
+using HerreraSierraVargasProyecto2P.Models;
+using HerreraSierraVargasProyecto2P.Services;
 using Microsoft.Maui.Controls;
 
-namespace Inventory.Mobile.Views
+namespace HerreraSierraVargasProyecto2P.Views
 {
     [QueryProperty(nameof(ProductoId), "productoId")]
     public partial class ProductoDetailPage : ContentPage

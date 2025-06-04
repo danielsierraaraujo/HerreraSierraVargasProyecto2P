@@ -1,4 +1,4 @@
-﻿using Inventory.Mobile;
+﻿using HerreraSierraVargasProyecto2P;
 using Microsoft.UI.Xaml;
 
 // To learn more about WinUI, the WinUI project structure,

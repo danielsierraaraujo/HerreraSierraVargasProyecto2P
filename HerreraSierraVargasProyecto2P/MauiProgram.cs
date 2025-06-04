@@ -3,10 +3,10 @@ using System.Net.Http;
 using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Inventory.Mobile.Services;
-using HerreraSierraVargasProyecto2P;
+using HerreraSierraVargasProyecto2P.Services;
+using HerreraSierraVargasProyecto2P.Models;
 
-namespace Inventory.Mobile
+namespace HerreraSierraVargasProyecto2P
 {
     public static class MauiProgram
     {

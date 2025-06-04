@@ -4,10 +4,10 @@ using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Inventory.Mobile.Models;
+using HerreraSierraVargasProyecto2P.Models;
 using Microsoft.Extensions.Logging;
 
-namespace Inventory.Mobile.Services
+namespace HerreraSierraVargasProyecto2P.Services
 {
     public class CategoriaService : ICategoriaService
     {

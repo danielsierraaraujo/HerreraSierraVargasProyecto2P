@@ -1,4 +1,4 @@
-﻿namespace Inventory.Mobile.Models
+﻿namespace HerreraSierraVargasProyecto2P.Models
 {
     public class ClienteDto
     {

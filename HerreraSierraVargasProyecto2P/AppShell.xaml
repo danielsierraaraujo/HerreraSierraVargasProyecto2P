@@ -1,31 +1,50 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Shell
-    x:Class="HerreraSierraVargasProyecto2P.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:HerreraSierraVargasProyecto2P"
-    Title="HerreraSierraVargasProyecto2P">
-    
-    <Shell.RouteHost>
-        <ShellContent Route="productoDetalle" ContentTemplate="{DataTemplate views:ProductoDetailPage}" />
-    </Shell.RouteHost>
-    
+    xmlns:views="clr-namespace:HerreraSierraVargasProyecto2P.Views"
+    x:Class="HerreraSierraVargasProyecto2P.AppShell">
+
+    <!-- Rutas a páginas de detalle que no están en TabBar -->
+    <ShellContent
+      Route="productoDetalle"
+      ContentTemplate="{DataTemplate views:ProductoDetailPage}" />
+    <ShellContent
+      Route="categoriaDetalle"
+      ContentTemplate="{DataTemplate views:CategoriaDetailPage}" />
+    <ShellContent
+      Route="clienteDetalle"
+      ContentTemplate="{DataTemplate views:ClienteDetailPage}" />
+    <ShellContent
+      Route="pedidoDetalle"
+      ContentTemplate="{DataTemplate views:PedidoDetailPage}" />
+
+    <!-- TabBar principal -->
     <TabBar>
-        <ShellContent Title="Productos"
-                      Icon="icon_productos.png"
-                      ContentTemplate="{DataTemplate local:ProductosPage}" />
 
-        <ShellContent Title="Categorías"
-                      Icon="icon_categorias.png"
-                      ContentTemplate="{DataTemplate local:CategoriasPage}" />
+        <!-- Pestaña Productos -->
+        <ShellContent
+        Title="Productos"
+        Icon="icon_productos.png"
+        ContentTemplate="{DataTemplate views:ProductosPage}" />
 
-        <ShellContent Title="Clientes"
-                      Icon="icon_clientes.png"
-                      ContentTemplate="{DataTemplate local:ClientesPage}" />
+        <!-- Pestaña Categorías -->
+        <ShellContent
+        Title="Categorías"
+        Icon="icon_categorias.png"
+        ContentTemplate="{DataTemplate views:CategoriasPage}" />
 
-        <ShellContent Title="Pedidos"
-                      Icon="icon_pedidos.png"
-                      ContentTemplate="{DataTemplate local:PedidosPage}" />
+        <!-- Pestaña Clientes -->
+        <ShellContent
+        Title="Clientes"
+        Icon="icon_clientes.png"
+        ContentTemplate="{DataTemplate views:ClientesPage}" />
+
+        <!-- Pestaña Pedidos -->
+        <ShellContent
+        Title="Pedidos"
+        Icon="icon_pedidos.png"
+        ContentTemplate="{DataTemplate views:PedidosPage}" />
+
     </TabBar>
-
 </Shell>
