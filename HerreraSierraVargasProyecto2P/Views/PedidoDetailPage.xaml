@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:HerreraSierraVargasProyecto2P.Views"
+    x:Class="HerreraSierraVargasProyecto2P.Views.PedidoDetailPage"
+    Title="Detalle Pedido">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="PrimaryColor">#2D6A4F</Color>
+            <Color x:Key="TextColor">#333333</Color>
+            <Color x:Key="SecondaryTextColor">#666666</Color>
+
+            <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="HeightRequest" Value="45" />
+            </Style>
+
+            <Style x:Key="NumericEntryStyle" TargetType="Entry">
+                <Setter Property="Keyboard" Value="Numeric" />
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="10" Spacing="15">
+
+                <!-- Picker para seleccionar Cliente -->
+                <Label
+          Text="Cliente"
+          FontAttributes="Bold"
+          FontSize="16"
+          TextColor="{StaticResource TextColor}" />
+                <Picker
+          x:Name="ClientePicker"
+          Title="Seleccione Cliente"
+          ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type views:PedidoDetailPage}}, Path=Clientes}"
+          ItemDisplayBinding="{Binding Nombre}" />
+
+                <!-- Botón para agregar una nueva fila de detalle -->
+                <Button
+          Text="Agregar Item"
+          Style="{StaticResource PrimaryButtonStyle}"
+          Clicked="OnAgregarItemDetalleClicked" />
+
+                <!-- CollectionView para DetallePedidos -->
+                <CollectionView
+          x:Name="DetallePedidosListView"
+          ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type views:PedidoDetailPage}}, Path=DetallePedidos}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                StrokeShape="RoundRectangle 8"
+                Stroke="LightGray"
+                StrokeThickness="1"
+                BackgroundColor="MistyRose"
+                Margin="5"
+                Padding="10">
+
+                                <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="5">
+
+                                    <!-- Fila 0: Picker de Producto -->
+                                    <Label
+                    Text="Producto"
+                    FontSize="14"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    TextColor="{StaticResource TextColor}" />
+                                    <Picker
+                    ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type views:PedidoDetailPage}}, Path=Productos}"
+                    ItemDisplayBinding="{Binding Nombre}"
+                    SelectedItem="{Binding Producto}"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2" />
+
+                                    <!-- Fila 1: Cantidad -->
+                                    <Label
+                    Text="Cantidad"
+                    FontSize="14"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    TextColor="{StaticResource TextColor}" />
+                                    <Entry
+                    Text="{Binding Cantidad}"
+                    Style="{StaticResource NumericEntryStyle}"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2" />
+
+                                    <!-- Fila 2: Precio Unitario -->
+                                    <Label
+                    Text="Precio Unit."
+                    FontSize="14"
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    TextColor="{StaticResource TextColor}" />
+                                    <Entry
+                    Text="{Binding PrecioUnitario}"
+                    Style="{StaticResource NumericEntryStyle}"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2" />
+
+                                    <!-- Botón para eliminar esta fila de detalle -->
+                                    <Button
+                    Text="Eliminar"
+                    BackgroundColor="Crimson"
+                    TextColor="White"
+                    HeightRequest="30"
+                    FontSize="12"
+                    Clicked="OnEliminarItemDetalleClicked"
+                    CommandParameter="{Binding .}"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    VerticalOptions="End"
+                    HorizontalOptions="End" />
+
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Botones Guardar y Cancelar -->
+                <HorizontalStackLayout Spacing="10" Margin="0,20,0,0">
+                    <Button
+            Text="Guardar Pedido"
+            Style="{StaticResource PrimaryButtonStyle}"
+            Clicked="OnGuardarPedidoClicked" />
+
+                    <Button
+            Text="Cancelar"
+            BackgroundColor="Gray"
+            TextColor="White"
+            CornerRadius="8"
+            HeightRequest="45"
+            Clicked="OnCancelarClicked" />
+                </HorizontalStackLayout>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

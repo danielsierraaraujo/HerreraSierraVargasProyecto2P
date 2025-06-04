@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="HerreraSierraVargasProyecto2P.Views.PedidosPage"
+    Title="Pedidos">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="PrimaryColor">#2D6A4F</Color>
+            <Color x:Key="TextColor">#333333</Color>
+            <Color x:Key="SecondaryTextColor">#666666</Color>
+
+            <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="HeightRequest" Value="45" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout Padding="10" Spacing="10">
+
+            <!-- Botón para agregar un nuevo pedido -->
+            <Button
+        Text="Agregar Pedido"
+        Style="{StaticResource PrimaryButtonStyle}"
+        Clicked="OnAgregarPedidoClicked" />
+
+            <!-- CollectionView para mostrar la lista de pedidos -->
+            <CollectionView
+        x:Name="PedidosListView"
+        SelectionMode="Single"
+        SelectionChanged="OnPedidoSeleccionado">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame
+              Margin="5"
+              CornerRadius="8"
+              HasShadow="True"
+              BorderColor="LightGray"
+              Padding="10">
+                            <Grid RowDefinitions="Auto,Auto,Auto">
+                                <!-- Fecha del pedido -->
+                                <Label
+                  Text="{Binding Fecha, StringFormat='Fecha: {0:dd/MM/yyyy}'}"
+                  FontSize="14"
+                  TextColor="{StaticResource TextColor}" />
+
+                                <!-- Nombre del cliente -->
+                                <Label
+                  Text="{Binding Cliente.Nombre}"
+                  FontAttributes="Bold"
+                  FontSize="16"
+                  Grid.Row="1"
+                  TextColor="{StaticResource TextColor}" />
+
+                                <!-- Total del pedido -->
+                                <Label
+                  Text="{Binding Total, StringFormat='Total: {0:C}'}"
+                  FontSize="14"
+                  Grid.Row="2"
+                  TextColor="{StaticResource SecondaryTextColor}" />
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
