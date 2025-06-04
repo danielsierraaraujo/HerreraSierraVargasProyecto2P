@@ -5,10 +5,27 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:HerreraSierraVargasProyecto2P"
     Title="HerreraSierraVargasProyecto2P">
+    
+    <Shell.RouteHost>
+        <ShellContent Route="productoDetalle" ContentTemplate="{DataTemplate views:ProductoDetailPage}" />
+    </Shell.RouteHost>
+    
+    <TabBar>
+        <ShellContent Title="Productos"
+                      Icon="icon_productos.png"
+                      ContentTemplate="{DataTemplate local:ProductosPage}" />
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        <ShellContent Title="Categorías"
+                      Icon="icon_categorias.png"
+                      ContentTemplate="{DataTemplate local:CategoriasPage}" />
+
+        <ShellContent Title="Clientes"
+                      Icon="icon_clientes.png"
+                      ContentTemplate="{DataTemplate local:ClientesPage}" />
+
+        <ShellContent Title="Pedidos"
+                      Icon="icon_pedidos.png"
+                      ContentTemplate="{DataTemplate local:PedidosPage}" />
+    </TabBar>
 
 </Shell>

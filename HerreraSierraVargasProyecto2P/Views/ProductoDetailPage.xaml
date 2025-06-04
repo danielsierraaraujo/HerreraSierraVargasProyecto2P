@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HerreraSierraVargasProyecto2P.Views.ProductoDetailPage"
+             Title="ProductoDetailPage">
+    <ScrollView>
+        <StackLayout Padding="10" Spacing="15">
+
+            <Entry
+                x:Name="NombreEntry"
+                Placeholder="Nombre del producto" />
+
+            <Editor
+                x:Name="DescripcionEditor"
+                Placeholder="Descripción"
+                AutoSize="TextChanges" />
+
+            <Entry
+                x:Name="PrecioEntry"
+                Placeholder="Precio"
+                Keyboard="Numeric" />
+
+            <Entry
+                x:Name="StockEntry"
+                Placeholder="Stock"
+                Keyboard="Numeric" />
+
+            <!-- Picker para seleccionar categoría -->
+            <Picker
+                x:Name="CategoriaPicker"
+                Title="Categoría" />
+
+            <!-- Botones para guardar o eliminar -->
+            <HorizontalStackLayout Spacing="10">
+                <Button
+                    Text="Guardar"
+                    Clicked="OnGuardarClicked"
+                    Style="{StaticResource PrimaryButtonStyle}" />
+
+                <Button
+                    x:Name="EliminarButton"
+                    Text="Eliminar"
+                    Clicked="OnEliminarClicked"
+                    BackgroundColor="Crimson"
+                    TextColor="White"
+                    IsVisible="False" />
+            </HorizontalStackLayout>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

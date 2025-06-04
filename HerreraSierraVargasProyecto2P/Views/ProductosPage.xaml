@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HerreraSierraVargasProyecto2P.Views.ProductosPage"
+             Title="ProductosPage">
+    <ContentPage.Content>
+        <StackLayout Padding="10" Spacing="10">
+
+            <!-- Botón para agregar un nuevo producto -->
+            <Button 
+                Text="Agregar Producto"
+                Clicked="OnAgregarProductoClicked"
+                Style="{StaticResource PrimaryButtonStyle}" />
+
+            <!-- CollectionView para mostrar la lista de productos -->
+            <CollectionView
+                x:Name="ProductosListView"
+                SelectionMode="Single"
+                SelectionChanged="OnProductoSeleccionado">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame
+                            Margin="5"
+                            CornerRadius="8"
+                            HasShadow="True"
+                            BorderColor="LightGray">
+
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label
+                                    Text="{Binding Nombre}"
+                                    FontAttributes="Bold"
+                                    FontSize="16" />
+
+                                <Label
+                                    Text="{Binding Precio, StringFormat='Precio: {0:C}'}"
+                                    FontSize="14"
+                                    Grid.Row="1" />
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
