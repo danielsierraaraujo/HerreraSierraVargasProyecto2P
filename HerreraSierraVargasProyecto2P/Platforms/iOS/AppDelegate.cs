@@ -1,4 +1,5 @@
 ﻿using Foundation;
+using Inventory.Mobile;
 
 namespace HerreraSierraVargasProyecto2P
 {

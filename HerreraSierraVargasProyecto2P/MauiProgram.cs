@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Net.Http;
 using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Inventory.Mobile.Services; // Crearemos estas interfaces/clases
-using System.Net.Http;
+using Inventory.Mobile.Services;
+using HerreraSierraVargasProyecto2P;
 
 namespace Inventory.Mobile
 {
