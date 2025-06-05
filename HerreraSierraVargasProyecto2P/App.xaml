@@ -12,10 +12,10 @@
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <AppThemeBinding
+            <!--<AppThemeBinding
           x:Key="AppStyles"
           Light="{StaticResource DarkThemeStyles}"
-          Dark="{StaticResource LightThemeStyles}" />
+          Dark="{StaticResource LightThemeStyles}" />-->
 
         </ResourceDictionary>
     </Application.Resources>
