@@ -1,58 +1,114 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HerreraSierraVargasProyecto2P.Views.InicioPage"
-             Title="Inicio">
+             Title="Inicio"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#FAF8F3">
+    <!-- Beige claro -->
 
-    <Grid RowDefinitions="*, *" ColumnDefinitions="*, *" Padding="20" RowSpacing="20" ColumnSpacing="20">
+    <Grid RowDefinitions="*, *"
+          ColumnDefinitions="*, *"
+          Padding="20"
+          RowSpacing="20"
+          ColumnSpacing="20">
 
         <!-- Productos -->
-        <Frame Grid.Row="0" Grid.Column="0" HasShadow="True" CornerRadius="10" Padding="10">
-            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                <ImageButton Source="icon_productos.png" Aspect="AspectFit" 
-                             HeightRequest="80" WidthRequest="80"
-                             HorizontalOptions="Center" VerticalOptions="Center"
-                             Clicked="Productos_Clicked" />
-                <Label Text="Productos" FontAttributes="Bold" FontSize="Medium" 
-                       HorizontalOptions="Center" Margin="0,8,0,0" />
+        <Frame Grid.Row="0" Grid.Column="0"
+               HasShadow="True"
+               CornerRadius="20"
+               BackgroundColor="White"
+               Padding="10">
+            <StackLayout HorizontalOptions="Center"
+                         VerticalOptions="Center">
+                <Image Source="icon_productos.png"
+                       Aspect="AspectFit"
+                       HeightRequest="80"
+                       WidthRequest="80" />
+                <Label Text="Productos"
+                       TextColor="#3b3b3f"
+                       FontAttributes="Bold"
+                       FontSize="Medium"
+                       HorizontalOptions="Center"
+                       Margin="0,8,0,0" />
             </StackLayout>
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="Productos_Tapped" />
+            </Frame.GestureRecognizers>
         </Frame>
 
         <!-- Categorías -->
-        <Frame Grid.Row="0" Grid.Column="1" HasShadow="True" CornerRadius="10" Padding="10">
-            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                <ImageButton Source="icon_categorias.png" Aspect="AspectFit"
-                             HeightRequest="80" WidthRequest="80"
-                             HorizontalOptions="Center" VerticalOptions="Center"
-                             Clicked="Categorias_Clicked" />
-                <Label Text="Categorías" FontAttributes="Bold" FontSize="Medium" 
-                       HorizontalOptions="Center" Margin="0,8,0,0" />
+        <Frame Grid.Row="0" Grid.Column="1"
+               HasShadow="True"
+               CornerRadius="20"
+               BackgroundColor="White"
+               Padding="10">
+            <StackLayout HorizontalOptions="Center"
+                         VerticalOptions="Center">
+                <Image Source="icon_categorias.png"
+                       Aspect="AspectFit"
+                       HeightRequest="80"
+                       WidthRequest="80" />
+                <Label Text="Categorías"
+                       TextColor="#3b3b3f"
+                       FontAttributes="Bold"
+                       FontSize="Medium"
+                       HorizontalOptions="Center"
+                       Margin="0,8,0,0" />
             </StackLayout>
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="Categorias_Tapped" />
+            </Frame.GestureRecognizers>
         </Frame>
 
         <!-- Clientes -->
-        <Frame Grid.Row="1" Grid.Column="0" HasShadow="True" CornerRadius="10" Padding="10">
-            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                <ImageButton Source="icon_clientes.png" Aspect="AspectFit"
-                             HeightRequest="80" WidthRequest="80"
-                             HorizontalOptions="Center" VerticalOptions="Center"
-                             Clicked="Clientes_Clicked" />
-                <Label Text="Clientes" FontAttributes="Bold" FontSize="Medium" 
-                       HorizontalOptions="Center" Margin="0,8,0,0" />
+        <Frame Grid.Row="1" Grid.Column="0"
+               HasShadow="True"
+               CornerRadius="20"
+               BackgroundColor="White"
+               Padding="10">
+            <StackLayout HorizontalOptions="Center"
+                         VerticalOptions="Center">
+                <Image Source="icon_clientes.png"
+                       Aspect="AspectFit"
+                       HeightRequest="80"
+                       WidthRequest="80" />
+                <Label Text="Clientes"
+                       TextColor="#3b3b3f"
+                       FontAttributes="Bold"
+                       FontSize="Medium"
+                       HorizontalOptions="Center"
+                       Margin="0,8,0,0" />
             </StackLayout>
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="Clientes_Tapped" />
+            </Frame.GestureRecognizers>
         </Frame>
 
         <!-- Pedidos -->
-        <Frame Grid.Row="1" Grid.Column="1" HasShadow="True" CornerRadius="10" Padding="10">
-            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                <ImageButton Source="icon_pedidos.png" Aspect="AspectFit"
-                             HeightRequest="80" WidthRequest="80"
-                             HorizontalOptions="Center" VerticalOptions="Center"
-                             Clicked="Pedidos_Clicked" />
-                <Label Text="Pedidos" FontAttributes="Bold" FontSize="Medium" 
-                       HorizontalOptions="Center" Margin="0,8,0,0" />
+        <Frame Grid.Row="1" Grid.Column="1"
+               HasShadow="True"
+               CornerRadius="20"
+               BackgroundColor="White"
+               Padding="10">
+            <StackLayout HorizontalOptions="Center"
+                         VerticalOptions="Center">
+                <Image Source="icon_pedidos.png"
+                       Aspect="AspectFit"
+                       HeightRequest="80"
+                       WidthRequest="80" />
+                <Label Text="Pedidos"
+                       TextColor="#3b3b3f"
+                       FontAttributes="Bold"
+                       FontSize="Medium"
+                       HorizontalOptions="Center"
+                       Margin="0,8,0,0" />
             </StackLayout>
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="Pedidos_Tapped" />
+            </Frame.GestureRecognizers>
         </Frame>
 
     </Grid>
 
 </ContentPage>
+

@@ -1,5 +1,5 @@
-using System;
 using Microsoft.Maui.Controls;
+using System;
 
 namespace HerreraSierraVargasProyecto2P.Views
 {
@@ -8,31 +8,29 @@ namespace HerreraSierraVargasProyecto2P.Views
         public InicioPage()
         {
             InitializeComponent();
-
-            // Oculta la TabBar en esta página (opcional)
-            Shell.SetTabBarIsVisible(this, false);
         }
 
-        private async void Productos_Clicked(object sender, EventArgs e)
+        private async void Productos_Tapped(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//productos");
+            await Shell.Current.GoToAsync("productos");
         }
 
-        private async void Categorias_Clicked(object sender, EventArgs e)
+        private async void Categorias_Tapped(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//categorias");
+            await Shell.Current.GoToAsync("categorias");
         }
 
-        private async void Clientes_Clicked(object sender, EventArgs e)
+        private async void Clientes_Tapped(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//clientes");
+            await Shell.Current.GoToAsync("clientes");
         }
 
-        private async void Pedidos_Clicked(object sender, EventArgs e)
+        private async void Pedidos_Tapped(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//pedidos");
+            await Shell.Current.GoToAsync("pedidos");
         }
     }
 }
+
 
 

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.Maui.Controls;
+﻿using Microsoft.Maui.Controls;
 
 namespace HerreraSierraVargasProyecto2P
 {
@@ -10,25 +8,19 @@ namespace HerreraSierraVargasProyecto2P
         {
             InitializeComponent();
 
-            this.Navigated += OnShellNavigated;
+            // Registrar rutas para navegación apilada
+            Routing.RegisterRoute("productos", typeof(Views.ProductosPage));
+            Routing.RegisterRoute("categorias", typeof(Views.CategoriasPage));
+            Routing.RegisterRoute("clientes", typeof(Views.ClientesPage));
+            Routing.RegisterRoute("pedidos", typeof(Views.PedidosPage));
+            Routing.RegisterRoute("productoDetalle", typeof(Views.ProductoDetailPage));
+            Routing.RegisterRoute("categoriaDetalle", typeof(Views.CategoriaDetailPage));
+            Routing.RegisterRoute("clienteDetalle", typeof(Views.ClienteDetailPage));
+            Routing.RegisterRoute("pedidoDetalle", typeof(Views.PedidoDetailPage));
 
-            // Navegar a Inicio solo al arrancar
-            Task.Run(async () => await GoToAsync("//inicio"));
-        }
-
-        private async void OnShellNavigated(object sender, ShellNavigatedEventArgs e)
-        {
-            var current = e?.Current?.Location?.ToString();
-            var previous = e?.Previous?.Location?.ToString();
-
-            if (current?.Contains("//inicio") == true && previous != null && !previous.Contains("//inicio"))
-            {
-                // Esperar 100ms para evitar conflicto de navegación en curso
-                await Task.Delay(100);
-
-                // Limpiar la pila y volver a la raíz de "inicio"
-                await Shell.Current.GoToAsync("//inicio", true);
-            }
+            // Ir a la pantalla de inicio al lanzar la app
+            GoToAsync("//inicio");
         }
     }
 }
+
