@@ -1,10 +1,13 @@
-﻿namespace HerreraSierraVargasProyecto2P.Models
+﻿using SQLite;
+
+namespace HerreraSierraVargasProyecto2P.Models
 {
     public class CategoriaDto
     {
+        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         public string Nombre { get; set; }
-        // (Opcional) Si quieres traer la lista de productos anidados:
+        [Ignore]
         public List<ProductoDto> Productos { get; set; }
     }
 }
