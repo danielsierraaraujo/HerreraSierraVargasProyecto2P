@@ -38,9 +38,11 @@ namespace HerreraSierraVargasProyecto2P
 
             // 3) Registrar ViewModels
             builder.Services.AddTransient<ProductosViewModel>();
+            builder.Services.AddTransient<CategoriasViewModel>();
 
             // 4) Registrar Vistas (Pages)
             builder.Services.AddTransient<ProductosPage>();
+            builder.Services.AddTransient<CategoriasPage>();
 
             return builder.Build();
         }

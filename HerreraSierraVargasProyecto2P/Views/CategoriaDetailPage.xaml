@@ -3,49 +3,64 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="HerreraSierraVargasProyecto2P.Views.CategoriaDetailPage"
-    Title="Detalle Categoría">
+    Title="Detalle Categoría"
+    BackgroundColor="#FAF8F3">
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Color x:Key="PrimaryColor">#2D6A4F</Color>
-            <Color x:Key="TextColor">#333333</Color>
+            <!-- Colores base -->
+            <Color x:Key="PrimaryColor">#4A90E2</Color>
+            <Color x:Key="TextColor">#3b3b3f</Color>
             <Color x:Key="SecondaryTextColor">#666666</Color>
 
             <Style x:Key="PrimaryButtonStyle" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="CornerRadius" Value="10" />
                 <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="HeightRequest" Value="45" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="FontSize" Value="16" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Padding="10" Spacing="15">
+            <StackLayout Padding="20" Spacing="20">
 
-                <!-- Entry para el Nombre de la Categoría -->
-                <Entry
-          x:Name="NombreEntry"
-          Placeholder="Nombre de la categoría"
-          FontSize="16" />
+                <!-- Frame para simular borde y padding en Entry -->
+                <Frame 
+                    CornerRadius="8" 
+                    Padding="10"
+                    BackgroundColor="White"
+                    HasShadow="False"
+                    BorderColor="#DDD">
+                    <Entry
+                        x:Name="NombreEntry"
+                        Placeholder="Nombre de la categoría"
+                        FontSize="16"
+                        TextColor="{StaticResource TextColor}"
+                        BackgroundColor="Transparent"
+                        />
+                </Frame>
 
                 <!-- Botones Guardar y Eliminar -->
-                <HorizontalStackLayout Spacing="10">
+                <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
                     <Button
-            Text="Guardar"
-            Style="{StaticResource PrimaryButtonStyle}"
-            Clicked="OnGuardarClicked" />
+                        Text="Guardar"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        WidthRequest="140"
+                        Clicked="OnGuardarClicked" />
 
                     <Button
-            x:Name="EliminarButton"
-            Text="Eliminar"
-            BackgroundColor="Crimson"
-            TextColor="White"
-            CornerRadius="8"
-            IsVisible="False"
-            Clicked="OnEliminarClicked" />
+                        x:Name="EliminarButton"
+                        Text="Eliminar"
+                        BackgroundColor="Crimson"
+                        TextColor="White"
+                        CornerRadius="10"
+                        WidthRequest="140"
+                        IsVisible="False"
+                        Clicked="OnEliminarClicked" />
                 </HorizontalStackLayout>
 
             </StackLayout>
