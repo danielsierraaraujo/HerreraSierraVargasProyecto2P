@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HerreraSierraVargasProyecto2P.Models;
@@ -14,9 +13,20 @@ namespace HerreraSierraVargasProyecto2P.Views
         private readonly IProductoService _productoService;
         private readonly ICategoriaService _categoriaService;
 
-        public int ProductoId { get; set; }  // se llena vía QueryProperty
+        private int _productoId;
+        public int ProductoId
+        {
+            get => _productoId;
+            set
+            {
+                _productoId = value;
+                // Carga el producto cuando el id se setea desde QueryProperty
+                _ = CargarProductoAsync(value);
+            }
+        }
 
         private ProductoDto _currentProducto;
+        private CategoriaDto[] _categorias;
 
         public ProductoDetailPage(IProductoService productoService,
                                  ICategoriaService categoriaService)
@@ -31,16 +41,27 @@ namespace HerreraSierraVargasProyecto2P.Views
         {
             base.OnAppearing();
 
-            // 1) Cargar todas las categorías en el Picker (para asignar producto.CategoriaId)
-            var categorias = await _categoriaService.ObtenerTodosAsync();
-            CategoriaPicker.ItemsSource = categorias;
-            CategoriaPicker.ItemDisplayBinding = new Binding("Nombre");
-
-            // 2) Si ProductoId > 0, estamos en “editar”, si es 0 o no viene, es “nuevo”
-            if (ProductoId > 0)
+            if (_categorias == null)
             {
-                _currentProducto = await _productoService.ObtenerPorIdAsync(ProductoId);
+                _categorias = (await _categoriaService.ObtenerTodosAsync()).ToArray();
+                CategoriaPicker.ItemsSource = _categorias;
+                CategoriaPicker.ItemDisplayBinding = new Binding("Nombre");
+            }
+        }
 
+        private async Task CargarProductoAsync(int productoId)
+        {
+            if (productoId <= 0)
+            {
+                _currentProducto = new ProductoDto();
+                EliminarButton.IsVisible = false;
+                LimpiarCampos();
+                return;
+            }
+
+            try
+            {
+                _currentProducto = await _productoService.ObtenerPorIdAsync(productoId);
                 if (_currentProducto != null)
                 {
                     NombreEntry.Text = _currentProducto.Nombre;
@@ -48,25 +69,31 @@ namespace HerreraSierraVargasProyecto2P.Views
                     PrecioEntry.Text = _currentProducto.Precio.ToString();
                     StockEntry.Text = _currentProducto.Stock.ToString();
 
-                    // Seleccionar la categoría actual en el Picker
-                    var categoriaSeleccionada = categorias.FirstOrDefault(c => c.Id == _currentProducto.CategoriaId);
+                    var categoriaSeleccionada = _categorias?.FirstOrDefault(c => c.Id == _currentProducto.CategoriaId);
                     if (categoriaSeleccionada != null)
                         CategoriaPicker.SelectedItem = categoriaSeleccionada;
 
-                    EliminarButton.IsVisible = true; // mostrar botón “Eliminar”
+                    EliminarButton.IsVisible = true;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                // Nuevo producto: limpiar campos y ocultar “Eliminar”
-                _currentProducto = new ProductoDto();
-                EliminarButton.IsVisible = false;
+                await DisplayAlert("Error", $"No se pudo cargar el producto: {ex.Message}", "OK");
             }
+        }
+
+        private void LimpiarCampos()
+        {
+            NombreEntry.Text = string.Empty;
+            DescripcionEditor.Text = string.Empty;
+            PrecioEntry.Text = string.Empty;
+            StockEntry.Text = string.Empty;
+            CategoriaPicker.SelectedItem = null;
         }
 
         private async void OnGuardarClicked(object sender, EventArgs e)
         {
-            // Validar (módulo muy básico de validación)
+            // Validaciones básicas
             if (string.IsNullOrWhiteSpace(NombreEntry.Text))
             {
                 await DisplayAlert("Error", "El nombre es obligatorio.", "OK");
@@ -88,25 +115,29 @@ namespace HerreraSierraVargasProyecto2P.Views
                 return;
             }
 
-            // Llenar _currentProducto con datos del formulario
             _currentProducto.Nombre = NombreEntry.Text;
             _currentProducto.Descripcion = DescripcionEditor.Text;
             _currentProducto.Precio = precio;
             _currentProducto.Stock = stock;
             _currentProducto.CategoriaId = (CategoriaPicker.SelectedItem as CategoriaDto).Id;
 
-            // Si viene de edición (_currentProducto.Id > 0), ejecutamos PUT; si no, POST
-            if (_currentProducto.Id > 0)
+            try
             {
-                await _productoService.ActualizarAsync(_currentProducto.Id, _currentProducto);
-            }
-            else
-            {
-                await _productoService.CrearAsync(_currentProducto);
-            }
+                if (_currentProducto.Id > 0)
+                {
+                    await _productoService.ActualizarAsync(_currentProducto.Id, _currentProducto);
+                }
+                else
+                {
+                    await _productoService.CrearAsync(_currentProducto);
+                }
 
-            // Una vez guardado, volver a la lista
-            await Shell.Current.GoToAsync("..");
+                await Shell.Current.GoToAsync("..");
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"No se pudo guardar el producto: {ex.Message}", "OK");
+            }
         }
 
         private async void OnEliminarClicked(object sender, EventArgs e)
@@ -115,8 +146,15 @@ namespace HerreraSierraVargasProyecto2P.Views
             if (!confirma)
                 return;
 
-            await _productoService.EliminarAsync(_currentProducto.Id);
-            await Shell.Current.GoToAsync("..");
+            try
+            {
+                await _productoService.EliminarAsync(_currentProducto.Id);
+                await Shell.Current.GoToAsync("..");
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"No se pudo eliminar el producto: {ex.Message}", "OK");
+            }
         }
     }
 }
