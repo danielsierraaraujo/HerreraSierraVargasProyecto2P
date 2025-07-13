@@ -21,30 +21,36 @@
 
     <!-- TabBar principal -->
     <TabBar>
-
-        <!-- Pestaña Productos -->
         <ShellContent
+    Title="Inicio"
+    Icon="icon_inicio.png"
+    ContentTemplate="{DataTemplate views:InicioPage}"
+    Route="inicio" />
+
+
+        <ShellContent
+        Route="productos"
         Title="Productos"
         Icon="icon_productos.png"
         ContentTemplate="{DataTemplate views:ProductosPage}" />
 
-        <!-- Pestaña Categorías -->
-        <ShellContent
+    <ShellContent
+        Route="categorias"
         Title="Categorías"
         Icon="icon_categorias.png"
         ContentTemplate="{DataTemplate views:CategoriasPage}" />
 
-        <!-- Pestaña Clientes -->
-        <ShellContent
+    <ShellContent
+        Route="clientes"
         Title="Clientes"
         Icon="icon_clientes.png"
         ContentTemplate="{DataTemplate views:ClientesPage}" />
 
-        <!-- Pestaña Pedidos -->
-        <ShellContent
+    <ShellContent
+        Route="pedidos"
         Title="Pedidos"
         Icon="icon_pedidos.png"
         ContentTemplate="{DataTemplate views:PedidosPage}" />
+</TabBar>
 
-    </TabBar>
 </Shell>
