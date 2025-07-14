@@ -1,28 +1,15 @@
-using System;
-using System.Collections.Generic;
-using HerreraSierraVargasProyecto2P.Models;    // --> Aquí está CategoriaDto
-using HerreraSierraVargasProyecto2P.Services;  // --> Aquí está ICategoriaService
+using HerreraSierraVargasProyecto2P.Models;
+using HerreraSierraVargasProyecto2P.ViewModels;
 using Microsoft.Maui.Controls;
 
 namespace HerreraSierraVargasProyecto2P.Views
 {
     public partial class CategoriasPage : ContentPage
     {
-        private readonly ICategoriaService _categoriaService;
-
-        public CategoriasPage(ICategoriaService categoriaService)
+        public CategoriasPage(CategoriasViewModel viewModel)
         {
             InitializeComponent();
-            _categoriaService = categoriaService;
-        }
-
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
-
-            // Cargar lista de categorías
-            var categorias = await _categoriaService.ObtenerTodosAsync();
-            CategoriasListView.ItemsSource = categorias;
+            BindingContext = viewModel;
         }
 
         private async void OnCategoriaSeleccionada(object sender, SelectionChangedEventArgs e)
@@ -34,16 +21,15 @@ namespace HerreraSierraVargasProyecto2P.Views
             if (categoriaSeleccionada == null)
                 return;
 
-            // Navegar a detalle de categoría, enviando el Id como parámetro
+            // Navegar a página de detalle de categoría enviando parámetro
             await Shell.Current.GoToAsync($"categoriaDetalle?categoriaId={categoriaSeleccionada.Id}");
 
-            // Deseleccionar el item
             ((CollectionView)sender).SelectedItem = null;
         }
 
-        private async void OnAgregarCategoriaClicked(object sender, EventArgs e)
+        private async void OnAgregarCategoriaClicked(object sender, System.EventArgs e)
         {
-            // Navegar a detalle de categoría en modo “nuevo”
+            // Navegar a página para crear nueva categoría
             await Shell.Current.GoToAsync("categoriaDetalle");
         }
     }

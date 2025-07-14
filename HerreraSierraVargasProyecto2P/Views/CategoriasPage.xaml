@@ -2,58 +2,74 @@
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:HerreraSierraVargasProyecto2P.ViewModels"
     x:Class="HerreraSierraVargasProyecto2P.Views.CategoriasPage"
-    Title="Categorías">
+    Title="Categorías"
+    BackgroundColor="#FAF8F3">
 
-    <!-- Usa los mismos recursos que definiste en ProductosPage.xaml -->
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Color x:Key="PrimaryColor">#2D6A4F</Color>
-            <Color x:Key="TextColor">#333333</Color>
+            <!-- Colores según tu paleta -->
+            <Color x:Key="PrimaryColor">#4A90E2</Color>
+            <!-- azul medio claro -->
+            <Color x:Key="AccentColor">#3b3b3f</Color>
+            <!-- gris oscuro -->
+            <Color x:Key="BackgroundColor">#FAF8F3</Color>
+            <!-- beige claro -->
+            <Color x:Key="TextColor">#3b3b3f</Color>
             <Color x:Key="SecondaryTextColor">#666666</Color>
 
+            <!-- Estilo botón primario -->
             <Style x:Key="PrimaryButtonStyle" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="CornerRadius" Value="10" />
                 <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="HeightRequest" Value="45" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="Margin" Value="0,10,0,10" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ContentPage.Content>
-        <StackLayout Padding="10" Spacing="10">
+    <StackLayout Padding="20" Spacing="20">
 
-            <!-- Botón para agregar una nueva categoría -->
-            <Button
-        Text="Agregar Categoría"
-        Style="{StaticResource PrimaryButtonStyle}"
-        Clicked="OnAgregarCategoriaClicked" />
+        <!-- Título con color azul -->
+        <Label
+            Text="Categorías"
+            FontSize="28"
+            FontAttributes="Bold"
+            TextColor="{StaticResource PrimaryColor}"
+            HorizontalOptions="Center" />
 
-            <!-- CollectionView para mostrar la lista de categorías -->
-            <CollectionView
-        x:Name="CategoriasListView"
-        SelectionMode="Single"
-        SelectionChanged="OnCategoriaSeleccionada">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame
-              Margin="5"
-              CornerRadius="8"
-              HasShadow="True"
-              BorderColor="LightGray"
-              Padding="10">
-                            <Label
-                Text="{Binding Nombre}"
-                FontAttributes="Bold"
-                FontSize="16"
-                TextColor="{StaticResource TextColor}" />
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+        <Button
+            Text="Agregar Categoría"
+            Style="{StaticResource PrimaryButtonStyle}"
+            Clicked="OnAgregarCategoriaClicked" />
 
-        </StackLayout>
-    </ContentPage.Content>
+        <CollectionView
+            ItemsSource="{Binding Categorias}"
+            SelectionMode="Single"
+            SelectionChanged="OnCategoriaSeleccionada"
+            BackgroundColor="Transparent">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame
+                        Margin="5"
+                        CornerRadius="12"
+                        HasShadow="True"
+                        BackgroundColor="White"
+                        BorderColor="{StaticResource AccentColor}"
+                        Padding="15">
+                        <Label
+                            Text="{Binding Nombre}"
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            TextColor="{StaticResource TextColor}" />
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </StackLayout>
 </ContentPage>
