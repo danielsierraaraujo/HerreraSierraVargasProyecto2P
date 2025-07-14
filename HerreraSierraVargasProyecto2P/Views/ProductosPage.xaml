@@ -6,82 +6,57 @@
     BackgroundColor="#FAF8F3"
     Title="Productos">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <!-- Colores base -->
-            <Color x:Key="PrimaryColor">#4A90E2</Color>
-            <!-- Azul medio claro -->
-            <Color x:Key="AccentColor">#3b3b3f</Color>
-            <!-- Gris oscuro -->
-            <Color x:Key="BackgroundColor">#FAF8F3</Color>
-            <!-- Beige claro -->
-            <Color x:Key="TextColor">#3b3b3f</Color>
-            <Color x:Key="SecondaryTextColor">#666666</Color>
-
-            <!-- Botón primario -->
-            <Style x:Key="PrimaryButtonStyle" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
-                <Setter Property="TextColor" Value="White" />
-                <Setter Property="CornerRadius" Value="10" />
-                <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="HeightRequest" Value="50" />
-                <Setter Property="FontSize" Value="16" />
-                <Setter Property="Margin" Value="0,10,0,10" />
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
     <ContentPage.Content>
-        <VerticalStackLayout Padding="20" Spacing="20">
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="20">
 
-            <!-- Título -->
-            <Label 
-                Text="Lista de Productos"
-                FontSize="24"
-                FontAttributes="Bold"
-                TextColor="{StaticResource AccentColor}"
-                HorizontalOptions="Center" />
+                <!-- Título -->
+                <Label 
+                    Text="Lista de Productos"
+                    FontSize="24"
+                    FontAttributes="Bold"
+                    TextColor="{StaticResource TextColor}"
+                    HorizontalOptions="Center" />
 
-            <!-- Botón para agregar producto -->
-            <Button 
-                Text="Agregar Producto"
-                Style="{StaticResource PrimaryButtonStyle}"
-                Clicked="OnAgregarProductoClicked" />
+                <!-- Botón para agregar producto -->
+                <Button 
+                    Text="Agregar Producto"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Clicked="OnAgregarProductoClicked" />
 
-            <!-- Lista de productos -->
-            <CollectionView
-                x:Name="ProductosListView"
-                SelectionMode="Single"
-                SelectionChanged="OnProductoSeleccionado"
-                BackgroundColor="Transparent">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame 
-                            Margin="5"
-                            CornerRadius="12"
-                            HasShadow="True"
-                            BackgroundColor="White"
-                            BorderColor="#E0E0E0"
-                            Padding="15">
-                            <VerticalStackLayout>
-                                <!-- Nombre del producto -->
-                                <Label 
-                                    Text="{Binding Nombre}"
-                                    FontAttributes="Bold"
-                                    FontSize="18"
-                                    TextColor="{StaticResource TextColor}" />
+                <!-- Lista de productos -->
+                <CollectionView
+                    x:Name="ProductosListView"
+                    SelectionMode="Single"
+                    SelectionChanged="OnProductoSeleccionado"
+                    BackgroundColor="Transparent">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame 
+                                Margin="5"
+                                CornerRadius="12"
+                                HasShadow="True"
+                                BackgroundColor="White"
+                                BorderColor="#E0E0E0"
+                                Padding="15">
+                                <VerticalStackLayout>
+                                    <Label 
+                                        Text="{Binding Nombre}"
+                                        FontAttributes="Bold"
+                                        FontSize="18"
+                                        TextColor="{StaticResource TextColor}" />
 
-                                <!-- Precio -->
-                                <Label 
-                                    Text="{Binding Precio, StringFormat='Precio: {0:C}'}"
-                                    FontSize="14"
-                                    TextColor="{StaticResource SecondaryTextColor}" />
-                            </VerticalStackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                                    <Label 
+                                        Text="{Binding Precio, StringFormat='Precio: {0:C}'}"
+                                        FontSize="14"
+                                        TextColor="{StaticResource SecondaryTextColor}" />
+                                </VerticalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-        </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

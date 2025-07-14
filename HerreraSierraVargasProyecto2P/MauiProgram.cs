@@ -35,6 +35,7 @@ namespace HerreraSierraVargasProyecto2P
             builder.Services.AddTransient<IClienteService, ClienteService>();
             builder.Services.AddTransient<IPedidoService, PedidoService>();
             builder.Services.AddTransient<IDetallePedidoService, DetallePedidoService>();
+
    
 
 
@@ -43,6 +44,8 @@ namespace HerreraSierraVargasProyecto2P
             builder.Services.AddTransient<CategoriasViewModel>();
             builder.Services.AddTransient<ClientesViewModel>();
             builder.Services.AddTransient<PedidosViewModel>();
+            builder.Services.AddTransient<PedidoDetailViewModel>();
+
 
 
 

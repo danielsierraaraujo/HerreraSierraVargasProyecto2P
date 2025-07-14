@@ -1,26 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:HerreraSierraVargasProyecto2P.LocalViewModels"
     x:Class="HerreraSierraVargasProyecto2P.LocalViews.CategoriaLocalPage"
+    x:Name="CategoriaLocal"
     Title="Categoría Local"
-    x:Name="MainPage">
+    BackgroundColor="#FAF8F3">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="15">
+        <VerticalStackLayout Padding="20" Spacing="20">
 
-            <Entry Placeholder="Nombre" Text="{Binding Nuevo.Nombre}" />
-            <Button Text="Agregar Categoría" Command="{Binding AgregarCommand}" />
+            <!-- Título -->
+            <Label 
+                Text="Gestión de Categorías"
+                FontSize="24"
+                FontAttributes="Bold"
+                TextColor="{StaticResource TextColor}"
+                HorizontalOptions="Center" />
 
+            <!-- Campo Nombre -->
+            <Frame CornerRadius="8" BackgroundColor="White" HasShadow="False" Padding="10">
+                <Entry 
+                    Placeholder="Nombre de la categoría"
+                    Text="{Binding Nuevo.Nombre}"
+                    TextColor="{StaticResource TextColor}" />
+            </Frame>
+
+            <!-- Botón Agregar -->
+            <Button 
+                Text="Agregar Categoría"
+                Command="{Binding AgregarCommand}"
+                Style="{StaticResource PrimaryButtonStyle}" />
+
+            <!-- Lista de Categorías -->
             <CollectionView ItemsSource="{Binding Items}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame BorderColor="LightGray" Padding="10" Margin="0,5">
+                        <Frame 
+                            BorderColor="LightGray" 
+                            Padding="15" 
+                            Margin="0,5"
+                            CornerRadius="12"
+                            BackgroundColor="White"
+                            HasShadow="True">
                             <VerticalStackLayout>
-                                <Label Text="{Binding Nombre}" />
-                                <Button Text="Eliminar"
-                                        Command="{Binding BindingContext.EliminarCommand, Source={x:Reference MainPage}}"
-                                        CommandParameter="{Binding .}" TextColor="Red" />
+                                <Label 
+                                    Text="{Binding Nombre}"
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    TextColor="{StaticResource TextColor}" />
+
+                                <Button 
+                                    Text="Eliminar"
+                                    Command="{Binding BindingContext.EliminarCommand, Source={x:Reference MainPage}}"
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="Crimson"
+                                    TextColor="White"
+                                    CornerRadius="10"
+                                    HeightRequest="40"
+                                    WidthRequest="120"
+                                    HorizontalOptions="End" />
                             </VerticalStackLayout>
                         </Frame>
                     </DataTemplate>

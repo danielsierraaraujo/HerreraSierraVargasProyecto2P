@@ -1,23 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:HerreraSierraVargasProyecto2P.LocalViewModels"
     x:Class="HerreraSierraVargasProyecto2P.LocalViews.LogsPage"
-    Title="Registros de Logs">
+    x:Name="LogsPageMain"
+    Title="Registros de Logs"
+    BackgroundColor="#FAF8F3">
 
-    <VerticalStackLayout Padding="20" Spacing="10">
-        <Label Text="Historial de acciones" FontSize="20" FontAttributes="Bold" />
+    <VerticalStackLayout Padding="20" Spacing="15">
 
+        <!-- Título -->
+        <Label 
+            Text="Historial de acciones"
+            FontSize="24"
+            FontAttributes="Bold"
+            TextColor="{StaticResource TextColor}"
+            HorizontalOptions="Center" />
+
+        <!-- Lista de Logs -->
         <CollectionView ItemsSource="{Binding Logs}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame BorderColor="LightGray" Margin="0,5">
-                        <Label Text="{Binding}" LineBreakMode="WordWrap" />
+                    <Frame 
+                        BorderColor="LightGray" 
+                        Padding="15" 
+                        Margin="0,5"
+                        CornerRadius="12"
+                        BackgroundColor="White"
+                        HasShadow="True">
+                        <Label 
+                            Text="{Binding}" 
+                            TextColor="{StaticResource SecondaryTextColor}"
+                            LineBreakMode="WordWrap" />
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Button Text="Borrar logs" Command="{Binding BorrarLogsCommand}" TextColor="Red" />
+        <!-- Botón Borrar -->
+        <Button 
+            Text="Borrar logs"
+            Command="{Binding BorrarLogsCommand}"
+            BackgroundColor="Crimson"
+            TextColor="White"
+            CornerRadius="10"
+            HeightRequest="50"
+            FontAttributes="Bold" />
+
     </VerticalStackLayout>
 </ContentPage>

@@ -93,7 +93,7 @@ namespace HerreraSierraVargasProyecto2P.Views
 
         private async void OnGuardarClicked(object sender, EventArgs e)
         {
-            // Validaciones básicas
+            // Validaciones bï¿½sicas
             if (string.IsNullOrWhiteSpace(NombreEntry.Text))
             {
                 await DisplayAlert("Error", "El nombre es obligatorio.", "OK");
@@ -101,17 +101,17 @@ namespace HerreraSierraVargasProyecto2P.Views
             }
             if (!decimal.TryParse(PrecioEntry.Text, out var precio))
             {
-                await DisplayAlert("Error", "Precio inválido.", "OK");
+                await DisplayAlert("Error", "Precio invï¿½lido.", "OK");
                 return;
             }
             if (!int.TryParse(StockEntry.Text, out var stock))
             {
-                await DisplayAlert("Error", "Stock inválido.", "OK");
+                await DisplayAlert("Error", "Stock invï¿½lido.", "OK");
                 return;
             }
             if (CategoriaPicker.SelectedItem == null)
             {
-                await DisplayAlert("Error", "Seleccione una categoría.", "OK");
+                await DisplayAlert("Error", "Seleccione una categorï¿½a.", "OK");
                 return;
             }
 
@@ -142,7 +142,7 @@ namespace HerreraSierraVargasProyecto2P.Views
 
         private async void OnEliminarClicked(object sender, EventArgs e)
         {
-            bool confirma = await DisplayAlert("Confirmar", "¿Eliminar este producto?", "Sí", "No");
+            bool confirma = await DisplayAlert("Confirmar", "ï¿½Eliminar este producto?", "Sï¿½", "No");
             if (!confirma)
                 return;
 
