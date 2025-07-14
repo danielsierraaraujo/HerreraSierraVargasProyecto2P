@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Agregar ApplicationDbContext con SQL Server
+// Cambiar configuración para usar SQLite en lugar de SQL Server
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Agregar servicios de controladores y Swagger
 builder.Services.AddControllers();

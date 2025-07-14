@@ -47,10 +47,10 @@
                 <!-- Botones Guardar y Eliminar -->
                 <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
                     <Button
+                        x:Name="GuardarButton"
                         Text="Guardar"
                         Style="{StaticResource PrimaryButtonStyle}"
-                        WidthRequest="140"
-                        Clicked="OnGuardarClicked" />
+                        WidthRequest="140" />
 
                     <Button
                         x:Name="EliminarButton"

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text;
@@ -22,57 +23,97 @@ namespace HerreraSierraVargasProyecto2P.Services
 
         public async Task<List<CategoriaDto>> ObtenerTodosAsync()
         {
-            var respuesta = await _http.GetAsync("api/Categorias");
-            if (respuesta.IsSuccessStatusCode)
+            try
             {
+                var respuesta = await _http.GetAsync("api/Categorias");
+                respuesta.EnsureSuccessStatusCode();
                 return await respuesta.Content.ReadFromJsonAsync<List<CategoriaDto>>();
             }
-            else
+            catch (Exception ex)
             {
-                _logger.LogError("Error al obtener categorías: {StatusCode}", respuesta.StatusCode);
+                _logger.LogError(ex, "Error al obtener categorías");
                 return new List<CategoriaDto>();
             }
         }
 
         public async Task<CategoriaDto> ObtenerPorIdAsync(int id)
         {
-            var respuesta = await _http.GetAsync($"api/Categorias/{id}");
-            if (respuesta.IsSuccessStatusCode)
+            try
             {
+                var respuesta = await _http.GetAsync($"api/Categorias/{id}");
+                respuesta.EnsureSuccessStatusCode();
                 return await respuesta.Content.ReadFromJsonAsync<CategoriaDto>();
             }
-            else
+            catch (Exception ex)
             {
-                _logger.LogError("Error al obtener categoría {Id}: {StatusCode}", id, respuesta.StatusCode);
+                _logger.LogError(ex, "Error al obtener categoría por ID");
                 return null;
             }
         }
 
-        public async Task CrearAsync(CategoriaDto categoria)
+        public async Task<bool> CrearAsync(CategoriaDto categoria)
         {
-            var contenido = JsonSerializer.Serialize(categoria);
-            var httpContent = new StringContent(contenido, Encoding.UTF8, "application/json");
+            try
+            {
+                var contenido = new StringContent(JsonSerializer.Serialize(categoria), Encoding.UTF8, "application/json");
+                var respuesta = await _http.PostAsync("api/Categorias", contenido);
 
-            var respuesta = await _http.PostAsync("api/Categorias", httpContent);
-            if (!respuesta.IsSuccessStatusCode)
-                _logger.LogError("Error al crear categoría: {StatusCode}", respuesta.StatusCode);
+                if (!respuesta.IsSuccessStatusCode)
+                {
+                    var contenidoError = await respuesta.Content.ReadAsStringAsync();
+                    throw new HttpRequestException($"Error API: {respuesta.StatusCode} - {contenidoError}");
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al crear categoría");
+                throw;
+            }
         }
 
-        public async Task ActualizarAsync(int id, CategoriaDto categoria)
+        public async Task<bool> ActualizarAsync(int id, CategoriaDto categoria)
         {
-            var contenido = JsonSerializer.Serialize(categoria);
-            var httpContent = new StringContent(contenido, Encoding.UTF8, "application/json");
+            try
+            {
+                var contenido = new StringContent(JsonSerializer.Serialize(categoria), Encoding.UTF8, "application/json");
+                var respuesta = await _http.PutAsync($"api/Categorias/{id}", contenido);
 
-            var respuesta = await _http.PutAsync($"api/Categorias/{id}", httpContent);
-            if (!respuesta.IsSuccessStatusCode)
-                _logger.LogError("Error al actualizar categoría {Id}: {StatusCode}", id, respuesta.StatusCode);
+                if (!respuesta.IsSuccessStatusCode)
+                {
+                    var contenidoError = await respuesta.Content.ReadAsStringAsync();
+                    throw new HttpRequestException($"Error API: {respuesta.StatusCode} - {contenidoError}");
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al actualizar categoría");
+                throw;
+            }
         }
 
-        public async Task EliminarAsync(int id)
+        public async Task<bool> EliminarAsync(int id)
         {
-            var respuesta = await _http.DeleteAsync($"api/Categorias/{id}");
-            if (!respuesta.IsSuccessStatusCode)
-                _logger.LogError("Error al eliminar categoría {Id}: {StatusCode}", id, respuesta.StatusCode);
+            try
+            {
+                var respuesta = await _http.DeleteAsync($"api/Categorias/{id}");
+
+                if (!respuesta.IsSuccessStatusCode)
+                {
+                    var contenidoError = await respuesta.Content.ReadAsStringAsync();
+                    throw new HttpRequestException($"Error API: {respuesta.StatusCode} - {contenidoError}");
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al eliminar categoría");
+                throw;
+            }
         }
     }
 }

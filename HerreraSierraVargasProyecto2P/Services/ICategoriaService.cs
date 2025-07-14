@@ -8,8 +8,8 @@ namespace HerreraSierraVargasProyecto2P.Services
     {
         Task<List<CategoriaDto>> ObtenerTodosAsync();
         Task<CategoriaDto> ObtenerPorIdAsync(int id);
-        Task CrearAsync(CategoriaDto categoria);
-        Task ActualizarAsync(int id, CategoriaDto categoria);
-        Task EliminarAsync(int id);
+        Task<bool> CrearAsync(CategoriaDto categoria);              // ← cambiado
+        Task<bool> ActualizarAsync(int id, CategoriaDto categoria); // ← cambiado
+        Task<bool> EliminarAsync(int id);                           // ← cambiado
     }
 }
