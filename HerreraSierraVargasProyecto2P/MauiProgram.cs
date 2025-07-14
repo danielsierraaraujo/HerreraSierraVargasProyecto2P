@@ -5,7 +5,7 @@ using Microsoft.Maui.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using HerreraSierraVargasProyecto2P.Services;
 using HerreraSierraVargasProyecto2P.ViewModels;
-using HerreraSierraVargasProyecto2P.Views; // <-- Añade esto para registrar tus páginas
+using HerreraSierraVargasProyecto2P.Views; 
 using HerreraSierraVargasProyecto2P.Models;
 using HerreraSierraVargasProyecto2P.Repositories;
 
@@ -41,10 +41,17 @@ namespace HerreraSierraVargasProyecto2P
             // 3) Registrar ViewModels
             builder.Services.AddTransient<ProductosViewModel>();
             builder.Services.AddTransient<CategoriasViewModel>();
+            builder.Services.AddTransient<ClientesViewModel>();
+            builder.Services.AddTransient<PedidosViewModel>();
+
+
 
             // 4) Registrar Vistas (Pages)
             builder.Services.AddTransient<ProductosPage>();
             builder.Services.AddTransient<CategoriasPage>();
+            builder.Services.AddTransient<ClientesPage>();
+            builder.Services.AddTransient<PedidosPage>();
+
 
             //Manejo de archivos
             string dbPath = Path.Combine(FileSystem.AppDataDirectory, "InventarioApp.db3");

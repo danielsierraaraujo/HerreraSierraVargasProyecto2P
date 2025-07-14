@@ -3,7 +3,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="HerreraSierraVargasProyecto2P.Views.PedidosPage"
-    Title="Pedidos">
+    Title="Pedidos"
+    BackgroundColor="#FAF8F3">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -26,44 +27,45 @@
 
             <!-- Botón para agregar un nuevo pedido -->
             <Button
-        Text="Agregar Pedido"
-        Style="{StaticResource PrimaryButtonStyle}"
-        Clicked="OnAgregarPedidoClicked" />
+                Text="Agregar Pedido"
+                Style="{StaticResource PrimaryButtonStyle}"
+                Command="{Binding AgregarPedidoCommand}" />
 
-            <!-- CollectionView para mostrar la lista de pedidos -->
+            <!-- Lista de pedidos -->
             <CollectionView
-        x:Name="PedidosListView"
-        SelectionMode="Single"
-        SelectionChanged="OnPedidoSeleccionado">
+                ItemsSource="{Binding Pedidos}"
+                SelectionMode="Single"
+                SelectedItem="{Binding SelectedPedido, Mode=TwoWay}"
+                BackgroundColor="Transparent">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame
-              Margin="5"
-              CornerRadius="8"
-              HasShadow="True"
-              BorderColor="LightGray"
-              Padding="10">
+                            Margin="5"
+                            CornerRadius="8"
+                            HasShadow="True"
+                            BorderColor="LightGray"
+                            Padding="10">
                             <Grid RowDefinitions="Auto,Auto,Auto">
                                 <!-- Fecha del pedido -->
                                 <Label
-                  Text="{Binding Fecha, StringFormat='Fecha: {0:dd/MM/yyyy}'}"
-                  FontSize="14"
-                  TextColor="{StaticResource TextColor}" />
+                                    Text="{Binding Fecha, StringFormat='Fecha: {0:dd/MM/yyyy}'}"
+                                    FontSize="14"
+                                    TextColor="{StaticResource TextColor}" />
 
                                 <!-- Nombre del cliente -->
                                 <Label
-                  Text="{Binding Cliente.Nombre}"
-                  FontAttributes="Bold"
-                  FontSize="16"
-                  Grid.Row="1"
-                  TextColor="{StaticResource TextColor}" />
+                                    Text="{Binding Cliente.Nombre}"
+                                    FontAttributes="Bold"
+                                    FontSize="16"
+                                    Grid.Row="1"
+                                    TextColor="{StaticResource TextColor}" />
 
                                 <!-- Total del pedido -->
                                 <Label
-                  Text="{Binding Total, StringFormat='Total: {0:C}'}"
-                  FontSize="14"
-                  Grid.Row="2"
-                  TextColor="{StaticResource SecondaryTextColor}" />
+                                    Text="{Binding Total, StringFormat='Total: {0:C}'}"
+                                    FontSize="14"
+                                    Grid.Row="2"
+                                    TextColor="{StaticResource SecondaryTextColor}" />
                             </Grid>
                         </Frame>
                     </DataTemplate>

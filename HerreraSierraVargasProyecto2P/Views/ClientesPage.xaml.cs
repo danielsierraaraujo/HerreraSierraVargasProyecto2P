@@ -1,28 +1,15 @@
-using System;
-using System.Collections.Generic;
-using HerreraSierraVargasProyecto2P.Models;    // --> ClienteDto
-using HerreraSierraVargasProyecto2P.Services;  // --> IClienteService
+using HerreraSierraVargasProyecto2P.Models;
+using HerreraSierraVargasProyecto2P.ViewModels;
 using Microsoft.Maui.Controls;
 
 namespace HerreraSierraVargasProyecto2P.Views
 {
     public partial class ClientesPage : ContentPage
     {
-        private readonly IClienteService _clienteService;
-
-        public ClientesPage(IClienteService clienteService)
+        public ClientesPage(ClientesViewModel viewModel)
         {
             InitializeComponent();
-            _clienteService = clienteService;
-        }
-
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
-
-            // Cargar lista de clientes
-            var clientes = await _clienteService.ObtenerTodosAsync();
-            ClientesListView.ItemsSource = clientes;
+            BindingContext = viewModel;
         }
 
         private async void OnClienteSeleccionado(object sender, SelectionChangedEventArgs e)
@@ -34,16 +21,15 @@ namespace HerreraSierraVargasProyecto2P.Views
             if (clienteSeleccionado == null)
                 return;
 
-            // Navegar a detalle de cliente, enviando el Id como parámetro
+            // Navegar a página de detalle de cliente, pasando parámetro (ajusta ruta si usas otra)
             await Shell.Current.GoToAsync($"clienteDetalle?clienteId={clienteSeleccionado.Id}");
 
-            // Deseleccionar item
             ((CollectionView)sender).SelectedItem = null;
         }
 
-        private async void OnAgregarClienteClicked(object sender, EventArgs e)
+        private async void OnAgregarClienteClicked(object sender, System.EventArgs e)
         {
-            // Navegar a detalle de cliente en modo “nuevo”
+            // Navegar a página para agregar nuevo cliente
             await Shell.Current.GoToAsync("clienteDetalle");
         }
     }
