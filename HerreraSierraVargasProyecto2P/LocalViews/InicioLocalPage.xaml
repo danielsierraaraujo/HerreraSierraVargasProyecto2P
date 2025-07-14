@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HerreraSierraVargasProyecto2P.LocalViews.InicioLocalPage"
+             Title="Gestión Local (SQLite)">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <Label Text="Gestión Local" FontSize="24" HorizontalOptions="Center" />
+
+            <Grid RowSpacing="20" ColumnSpacing="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Text="Productos"
+                        Grid.Row="0" Grid.Column="0"
+                        Clicked="OnProductosClicked" />
+
+                <Button Text="Categorías"
+                        Grid.Row="0" Grid.Column="1"
+                        Clicked="OnCategoriasClicked" />
+
+                <Button Text="Clientes"
+                        Grid.Row="1" Grid.Column="0"
+                        Clicked="OnClientesClicked" />
+
+                <Button Text="Pedidos"
+                        Grid.Row="1" Grid.Column="1"
+                        Clicked="OnPedidosClicked" />
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,36 @@
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:HerreraSierraVargasProyecto2P.LocalViewModels"
+    x:Class="HerreraSierraVargasProyecto2P.LocalViews.ClienteLocalPage"
+    Title="Cliente Local"
+    x:Name="MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Entry Placeholder="Nombre" Text="{Binding Nuevo.Nombre}" />
+            <Entry Placeholder="Email" Text="{Binding Nuevo.Email}" />
+            <Entry Placeholder="Teléfono" Text="{Binding Nuevo.Telefono}" />
+            <Button Text="Agregar Cliente" Command="{Binding AgregarCommand}" />
+
+            <CollectionView ItemsSource="{Binding Items}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="LightGray" Padding="10" Margin="0,5">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Nombre}" FontAttributes="Bold"/>
+                                <Label Text="{Binding Email}" />
+                                <Label Text="{Binding Telefono}" />
+                                <Button Text="Eliminar"
+                                        Command="{Binding BindingContext.EliminarCommand, Source={x:Reference MainPage}}"
+                                        CommandParameter="{Binding .}" TextColor="Red" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
