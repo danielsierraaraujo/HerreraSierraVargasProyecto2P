@@ -28,4 +28,10 @@ public partial class InicioLocalPage : ContentPage
     {
         await Shell.Current.GoToAsync(nameof(PedidoLocalPage));
     }
+
+    private async void OnLogsClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(LogsPage));
+    }
+
 }

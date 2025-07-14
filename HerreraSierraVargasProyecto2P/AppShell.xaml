@@ -1,16 +1,29 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:views="clr-namespace:HerreraSierraVargasProyecto2P.Views"
-       xmlns:localviews="clr-namespace:HerreraSierraVargasProyecto2P.LocalViews"
-       x:Class="HerreraSierraVargasProyecto2P.AppShell">
+<?xml version="1.0" encoding="utf-8" ?>
+<Shell
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:HerreraSierraVargasProyecto2P.Views"
+    xmlns:localviews="clr-namespace:HerreraSierraVargasProyecto2P.LocalViews"
+    x:Class="HerreraSierraVargasProyecto2P.AppShell">
 
+    <!-- Rutas de navegación sin pestaña -->
+    <ShellContent Route="productoDetalle" ContentTemplate="{DataTemplate views:ProductoDetailPage}" />
+    <ShellContent Route="categoriaDetalle" ContentTemplate="{DataTemplate views:CategoriaDetailPage}" />
+    <ShellContent Route="clienteDetalle" ContentTemplate="{DataTemplate views:ClienteDetailPage}" />
+    <ShellContent Route="pedidoDetalle" ContentTemplate="{DataTemplate views:PedidoDetailPage}" />
+
+    <!-- Navegación principal con TabBar -->
     <TabBar>
-        <!-- Sección API Remota -->
-        <ShellContent Title="Remoto" ContentTemplate="{DataTemplate views.MainPage}" />
+        <ShellContent
+            Title="Remoto"
+            Icon="icon_inicio.png"
+            ContentTemplate="{DataTemplate views:InicioPage}"
+            Route="inicio" />
 
-        <!-- Sección SQLite Local -->
-        <ShellContent Title="Local" ContentTemplate="{DataTemplate localviews.InicioLocalPage}" />
+        <ShellContent
+            Title="Local"
+            Icon="icon_local.png"
+            ContentTemplate="{DataTemplate localviews:InicioLocalPage}"
+            Route="inicioLocal" />
     </TabBar>
-
 </Shell>

@@ -7,6 +7,7 @@ using HerreraSierraVargasProyecto2P.Services;
 using HerreraSierraVargasProyecto2P.ViewModels;
 using HerreraSierraVargasProyecto2P.Views; // <-- Añade esto para registrar tus páginas
 using HerreraSierraVargasProyecto2P.Models;
+using HerreraSierraVargasProyecto2P.Repositories;
 
 namespace HerreraSierraVargasProyecto2P
 {
@@ -34,6 +35,8 @@ namespace HerreraSierraVargasProyecto2P
             builder.Services.AddTransient<IClienteService, ClienteService>();
             builder.Services.AddTransient<IPedidoService, PedidoService>();
             builder.Services.AddTransient<IDetallePedidoService, DetallePedidoService>();
+   
+
 
             // 3) Registrar ViewModels
             builder.Services.AddTransient<ProductosViewModel>();
@@ -42,6 +45,13 @@ namespace HerreraSierraVargasProyecto2P
             // 4) Registrar Vistas (Pages)
             builder.Services.AddTransient<ProductosPage>();
             builder.Services.AddTransient<CategoriasPage>();
+
+            //Manejo de archivos
+            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "InventarioApp.db3");
+
+            builder.Services.AddSingleton<AppDatabase>(s => new AppDatabase(dbPath));
+
+            builder.Services.AddSingleton<LogService>();
 
             return builder.Build();
         }
