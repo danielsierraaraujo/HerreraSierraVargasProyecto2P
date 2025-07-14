@@ -67,7 +67,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="LocalViews\ProductosLocalPage.xaml">
+	  <MauiXaml Update="LocalViews\CategoriaLocalPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="LocalViews\ClienteLocalPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="LocalViews\DetallePedidoLocalPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="LocalViews\PedidoLocalPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="LocalViews\ProductoLocalPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\CategoriaDetailPage.xaml">

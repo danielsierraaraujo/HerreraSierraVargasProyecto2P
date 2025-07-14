@@ -1,14 +1,10 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:HerreraSierraVargasProyecto2P.LocalViewModels"
-    x:Class="HerreraSierraVargasProyecto2P.LocalViews.ProductosLocalPage"
-    Title="Productos Locales">
-
-    <ContentPage.BindingContext>
-        <vm:ProductoLocalViewModel />
-    </ContentPage.BindingContext>
+    x:Class="HerreraSierraVargasProyecto2P.LocalViews.ProductoLocalPage"
+    Title="Producto Local"
+    x:Name="MainPage">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
@@ -17,26 +13,20 @@
             <Entry Placeholder="Descripción" Text="{Binding Nuevo.Descripcion}" />
             <Entry Placeholder="Precio" Keyboard="Numeric" Text="{Binding Nuevo.Precio}" />
             <Entry Placeholder="Stock" Keyboard="Numeric" Text="{Binding Nuevo.Stock}" />
-            <Button Text="Agregar producto"
-                    Command="{Binding AgregarCommand}" />
+            <Button Text="Agregar Producto" Command="{Binding AgregarCommand}" />
 
-            <BoxView HeightRequest="2" Color="Gray" Margin="0,10"/>
-
-            <Label Text="Lista de productos" FontAttributes="Bold"/>
             <CollectionView ItemsSource="{Binding Items}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame BorderColor="LightGray" Padding="10" Margin="0,5">
                             <VerticalStackLayout>
-                                <Label Text="{Binding Nombre}" FontAttributes="Bold" />
+                                <Label Text="{Binding Nombre}" FontAttributes="Bold"/>
                                 <Label Text="{Binding Descripcion}" />
                                 <Label Text="{Binding Precio, StringFormat='Precio: {0:C}'}" />
-                                <Label Text="{Binding Stock, StringFormat='Stock: {0} unidades'}" />
-
+                                <Label Text="{Binding Stock, StringFormat='Stock: {0}'}" />
                                 <Button Text="Eliminar"
-                                        Command="{Binding BindingContext.EliminarCommand, Source={x:Reference Name=MainPage}}"
-                                        CommandParameter="{Binding .}"
-                                        TextColor="Red"/>
+                                        Command="{Binding BindingContext.EliminarCommand, Source={x:Reference MainPage}}"
+                                        CommandParameter="{Binding .}" TextColor="Red" />
                             </VerticalStackLayout>
                         </Frame>
                     </DataTemplate>
