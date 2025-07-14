@@ -2,152 +2,66 @@
 using HerreraSierraVargasProyecto2P.Services;
 using Microsoft.Maui.Controls;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace HerreraSierraVargasProyecto2P.ViewModels
 {
-    public class PedidoDetailViewModel : BindableObject
+    public class PedidosViewModel : BindableObject
     {
         private readonly IPedidoService _pedidoService;
-        private readonly IClienteService _clienteService;
-        private readonly IProductoService _productoService;
 
-        private PedidoDto _currentPedido;
+        public ObservableCollection<PedidoDto> Pedidos { get; } = new();
 
-        public ObservableCollection<DetallePedidoDto> DetallePedidos { get; } = new ObservableCollection<DetallePedidoDto>();
-        public ObservableCollection<ClienteDto> Clientes { get; } = new ObservableCollection<ClienteDto>();
-        public ObservableCollection<ProductoDto> Productos { get; } = new ObservableCollection<ProductoDto>();
-
-        private ClienteDto _clienteSeleccionado;
-        public ClienteDto ClienteSeleccionado
+        private PedidoDto _selectedPedido;
+        public PedidoDto SelectedPedido
         {
-            get => _clienteSeleccionado;
+            get => _selectedPedido;
             set
             {
-                if (_clienteSeleccionado != value)
+                if (_selectedPedido != value)
                 {
-                    _clienteSeleccionado = value;
+                    _selectedPedido = value;
                     OnPropertyChanged();
+
+                    if (_selectedPedido != null)
+                        AbrirDetallePedidoCommand.Execute(_selectedPedido);
                 }
             }
         }
 
-        private int _pedidoId;
-        public int PedidoId
-        {
-            get => _pedidoId;
-            set
-            {
-                if (_pedidoId != value)
-                {
-                    _pedidoId = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+        public ICommand LoadPedidosCommand { get; }
+        public ICommand AbrirDetallePedidoCommand { get; }
+        public ICommand AgregarPedidoCommand { get; }
 
-        public ICommand AgregarItemDetalleCommand { get; }
-        public ICommand EliminarItemDetalleCommand { get; }
-        public ICommand GuardarPedidoCommand { get; }
-        public ICommand CancelarCommand { get; }
-
-        public PedidoDetailViewModel(IPedidoService pedidoService, IClienteService clienteService, IProductoService productoService)
+        public PedidosViewModel(IPedidoService pedidoService)
         {
             _pedidoService = pedidoService;
-            _clienteService = clienteService;
-            _productoService = productoService;
 
-            AgregarItemDetalleCommand = new Command(AgregarItemDetalle);
-            EliminarItemDetalleCommand = new Command<DetallePedidoDto>(EliminarItemDetalle);
-            GuardarPedidoCommand = new Command(async () => await GuardarPedidoAsync());
-            CancelarCommand = new Command(async () => await CancelarAsync());
+            LoadPedidosCommand = new Command(async () => await LoadPedidosAsync());
+            AbrirDetallePedidoCommand = new Command<PedidoDto>(async (pedido) => await AbrirDetallePedidoAsync(pedido));
+            AgregarPedidoCommand = new Command(async () => await AgregarPedidoAsync());
         }
 
-        public async Task LoadDataAsync(int pedidoId)
+        private async Task LoadPedidosAsync()
         {
-            PedidoId = pedidoId;
-
-            var listaClientes = await _clienteService.ObtenerTodosAsync();
-            Clientes.Clear();
-            foreach (var c in listaClientes)
-                Clientes.Add(c);
-
-            var listaProductos = await _productoService.ObtenerTodosAsync();
-            Productos.Clear();
-            foreach (var p in listaProductos)
-                Productos.Add(p);
-
-            if (pedidoId > 0)
-            {
-                _currentPedido = await _pedidoService.ObtenerPorIdAsync(pedidoId);
-                ClienteSeleccionado = Clientes.FirstOrDefault(c => c.Id == _currentPedido.ClienteId);
-
-                DetallePedidos.Clear();
-                foreach (var det in _currentPedido.DetallePedidos)
-                    DetallePedidos.Add(det);
-            }
-            else
-            {
-                _currentPedido = new PedidoDto
-                {
-                    DetallePedidos = new System.Collections.Generic.List<DetallePedidoDto>()
-                };
-                DetallePedidos.Clear();
-            }
+            var pedidos = await _pedidoService.ObtenerTodosAsync();
+            Pedidos.Clear();
+            foreach (var p in pedidos)
+                Pedidos.Add(p);
         }
 
-        private void AgregarItemDetalle()
+        private async Task AbrirDetallePedidoAsync(PedidoDto pedido)
         {
-            DetallePedidos.Add(new DetallePedidoDto
-            {
-                Cantidad = 1,
-                PrecioUnitario = 0m
-            });
+            if (pedido == null) return;
+            // Navega a la página detalle con el id del pedido
+            await Shell.Current.GoToAsync($"pedidoDetalle?pedidoId={pedido.Id}");
         }
 
-        private void EliminarItemDetalle(DetallePedidoDto detalle)
+        private async Task AgregarPedidoAsync()
         {
-            if (detalle != null)
-                DetallePedidos.Remove(detalle);
-        }
-
-        private async Task GuardarPedidoAsync()
-        {
-            if (ClienteSeleccionado == null)
-            {
-                await App.Current.MainPage.DisplayAlert("Error", "Seleccione un cliente.", "OK");
-                return;
-            }
-
-            _currentPedido.ClienteId = ClienteSeleccionado.Id;
-            _currentPedido.Fecha = System.DateTime.UtcNow;
-            _currentPedido.DetallePedidos = DetallePedidos.ToList();
-
-            decimal total = 0m;
-            foreach (var det in _currentPedido.DetallePedidos)
-            {
-                if (det.Producto == null)
-                {
-                    await App.Current.MainPage.DisplayAlert("Error", "Cada detalle debe tener un producto.", "OK");
-                    return;
-                }
-                total += det.Cantidad * det.PrecioUnitario;
-            }
-            _currentPedido.Total = total;
-
-            if (_currentPedido.Id > 0)
-                await _pedidoService.ActualizarAsync(_currentPedido.Id, _currentPedido);
-            else
-                await _pedidoService.CrearPedidoAsync(_currentPedido);
-
-            await Shell.Current.GoToAsync("..");
-        }
-
-        private async Task CancelarAsync()
-        {
-            await Shell.Current.GoToAsync("..");
+            // Navega a página detalle sin id para crear uno nuevo
+            await Shell.Current.GoToAsync("pedidoDetalle");
         }
     }
 }

@@ -15,17 +15,16 @@ namespace HerreraSierraVargasProyecto2P.Views
             BindingContext = _viewModel;
         }
 
-        // Opcional: Recibir pedidoId si usas Shell routing con QueryProperty
-        public int PedidoId { get; set; }
-
         protected override async void OnAppearing()
         {
             base.OnAppearing();
 
-            // Cargar datos con el pedidoId
             try
             {
-                await _viewModel.LoadDataAsync(PedidoId);
+                // Asume que recibes pedidoId de alguna forma, por ejemplo navegación con parámetros
+                int pedidoId = 0; // Cambia según contexto real
+
+                await _viewModel.LoadDataAsync(pedidoId);
             }
             catch (Exception ex)
             {
