@@ -76,6 +76,12 @@
 	  <MauiXaml Update="LocalViews\DetallePedidoLocalPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="LocalViews\InicioLocalPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="LocalViews\LogsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="LocalViews\PedidoLocalPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

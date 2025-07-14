@@ -25,8 +25,7 @@ namespace HerreraSierraVargasProyecto2P
             // 1) Registrar HttpClient apuntando al API
             builder.Services.AddHttpClient("InventoryAPI", client =>
             {
-                client.BaseAddress = new Uri("https://localhost:7115/");
-                // Si tu API no usa HTTPS, cambia por: http://localhost:5034/
+                client.BaseAddress = new Uri("http://localhost:5034/");
             });
 
             // 2) Registrar servicios (interfaces → implementaciones)

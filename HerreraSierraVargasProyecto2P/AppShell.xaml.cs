@@ -1,4 +1,7 @@
 ﻿using Microsoft.Maui.Controls;
+using HerreraSierraVargasProyecto2P.LocalViews;
+using HerreraSierraVargasProyecto2P.Views;
+
 
 namespace HerreraSierraVargasProyecto2P
 {
@@ -8,18 +11,17 @@ namespace HerreraSierraVargasProyecto2P
         {
             InitializeComponent();
 
-            // Registrar rutas para navegación apilada
-            Routing.RegisterRoute("productos", typeof(Views.ProductosPage));
-            Routing.RegisterRoute("categorias", typeof(Views.CategoriasPage));
-            Routing.RegisterRoute("clientes", typeof(Views.ClientesPage));
-            Routing.RegisterRoute("pedidos", typeof(Views.PedidosPage));
-            Routing.RegisterRoute("productoDetalle", typeof(Views.ProductoDetailPage));
-            Routing.RegisterRoute("categoriaDetalle", typeof(Views.CategoriaDetailPage));
-            Routing.RegisterRoute("clienteDetalle", typeof(Views.ClienteDetailPage));
-            Routing.RegisterRoute("pedidoDetalle", typeof(Views.PedidoDetailPage));
+            // Rutas API
+            Routing.RegisterRoute(nameof(ProductosPage), typeof(ProductosPage));
+            Routing.RegisterRoute(nameof(CategoriasPage), typeof(CategoriasPage));
+            Routing.RegisterRoute(nameof(ClientesPage), typeof(ClientesPage));
+            Routing.RegisterRoute(nameof(PedidosPage), typeof(PedidosPage));
 
-            // Ir a la pantalla de inicio al lanzar la app
-            GoToAsync("//inicio");
+            // Rutas SQLite Local
+            Routing.RegisterRoute(nameof(ProductoLocalPage), typeof(ProductoLocalPage));
+            Routing.RegisterRoute(nameof(CategoriaLocalPage), typeof(CategoriaLocalPage));
+            Routing.RegisterRoute(nameof(ClienteLocalPage), typeof(ClienteLocalPage));
+            Routing.RegisterRoute(nameof(PedidoLocalPage), typeof(PedidoLocalPage));
         }
     }
 }
